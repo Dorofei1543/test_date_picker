@@ -35,12 +35,10 @@ function App() {
             },
           },
         }}
+        autoFocus
         enableAccessibleFieldDOMStructure
         isPickerOpen={startDateOpen}
-        onChange={(params) => {
-          setStartDate(params);
-          setStartDateOpen(false);
-        }}
+        onChange={setStartDate}
         autoOk
       />
 
