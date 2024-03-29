@@ -1,19 +1,17 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import "./App.css";
 import MWDatePicker from "./Test";
 
 function App() {
   const [startDateOpen, setStartDateOpen] = useState(false);
   const [startDate, setStartDate] = useState(false);
-
+  const inputFocusRef = useRef();
   return (
     <div className="App">
       <p>
         Edit <code>src/App.js</code> and save to reload.
       </p>
       <MWDatePicker
-        disableToolbar
-        variant="inline"
         open={startDateOpen}
         onOpen={() => setStartDateOpen(true)}
         setStartDate={setStartDateOpen}
@@ -22,16 +20,27 @@ function App() {
           "data-testid": "cmrc-formlet-start-date-button",
         }}
         format="DD MMM YYYY"
-        PopperProps={{
-          disablePortal: true,
-        }}
         value={startDate}
         slotProps={{
+          desktopPaper: {
+            onClick: (kek, nekek) => {
+              kek.target.blur();
+              inputFocusRef?.current.blur();
+            },
+          },
           textField: {
-            onClick: () => setStartDateOpen(true),
+            onClick: (event) => {
+              !startDateOpen && setStartDateOpen(true);
+              inputFocusRef.current = event.target;
+            },
           },
         }}
-        onChange={setStartDate}
+        enableAccessibleFieldDOMStructure
+        isPickerOpen={startDateOpen}
+        onChange={(params) => {
+          setStartDate(params);
+          setStartDateOpen(false);
+        }}
         autoOk
       />
 
