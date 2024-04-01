@@ -12,17 +12,20 @@ function App() {
       </p>
       <MWDatePicker
         open={startDateOpen}
-        onOpen={() => setStartDateOpen(true)}
         onClose={() => setStartDateOpen(false)}
-        setStartDate={setStartDateOpen}
+        onOpen={() => setStartDateOpen(true)}
+        disableToolbar
+        variant="inline"
+        inputVariant="standard"
+        InputProps={{
+          placeholder: "Select a date",
+        }}
         id="cmrc-formlet-start-date-input"
         KeyboardButtonProps={{
           "data-testid": "cmrc-formlet-start-date-button",
         }}
-        format="DD MMM YYYY"
+        format="DD-MMM-YYYY"
         value={startDate}
-        autoFocus
-        isPickerOpen={startDateOpen}
         onChange={setStartDate}
         autoOk
       />
