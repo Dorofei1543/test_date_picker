@@ -1,4 +1,3 @@
-import { ClickAwayListener } from "@mui/base/ClickAwayListener";
 import { DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import moment from "moment";
@@ -11,17 +10,9 @@ const MWDatePicker = (props) => {
   const momentDate = value ? moment(value) : null;
 
   return (
-    <ClickAwayListener
-      onClickAway={() => {
-        props.setStartDate(false);
-      }}
-    >
-      <div>
-        <LocalizationProvider dateAdapter={AdapterMoment}>
-          <DesktopDatePicker value={momentDate} error={error} {...otherProps} />
-        </LocalizationProvider>
-      </div>
-    </ClickAwayListener>
+    <LocalizationProvider dateAdapter={AdapterMoment}>
+      <DesktopDatePicker value={momentDate} error={error} {...otherProps} />
+    </LocalizationProvider>
   );
 };
 
